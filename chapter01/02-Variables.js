@@ -28,7 +28,7 @@ function myOtherFunction(){
     myOtherVariable = 'local';
     return myOtherVariable;
 }
-
+// console.log(this);
 console.log(myVariable);   //{1}
 console.log(myFunction()); //{2}
 
