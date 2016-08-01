@@ -24,9 +24,8 @@ var numbers = [1, 2, ...params]; //pushing values into array
 console.log(numbers);
 
 //******* EcmaScript 6: rest parameter ('...')
-function restParamaterFunction (x, y, ...a) {
-    return (x + y) * a.length;
-}
+let restParamaterFunction = (x, y, ...a) => (x + y) * a.length;
+
 console.log(restParamaterFunction(1, 2, "hello", true, 7)); // outputs 9;
 
 //code above is the same as ES5:

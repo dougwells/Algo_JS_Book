@@ -3,10 +3,11 @@ var [x, y] = ['a', 'b'];
 var obj = { x, y };
 console.log(obj); // { x: "a", y: "b" }
 
+//swap x & y values
 [x, y] = [y, x];
-var temp = x;
-x = y;
-y = temp;
+var obj = { x, y };
+console.log(obj); // { x: "b", y: "a" }
+
 
 //code above is the same as
 var x = 'a';

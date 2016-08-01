@@ -9,8 +9,8 @@ var framework = 'Angular';
 var framework = 'React';
 console.log(framework);
 
-let language = 'JavaScript!';
-//let language = 'Ruby!'; //throws error
+// let language = 'JavaScript!';
+let language = 'Ruby!'; //throws error
 console.log(language);
 
 //******* EcmaScript 6: variables scope
