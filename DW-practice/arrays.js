@@ -23,3 +23,9 @@ console.log(".forEach -> Plus 1", forEachEx, "origin", stack);
 //.map() and .filter return NEW arrays
 var mapExArr = stack.map(function(item){return item+1;})
 console.log(".map -> Plus 1", mapExArr, "origin", stack);
+
+//.for of loop.  New in ES6
+let cuts = ["steak", "chop", "roast"]
+for (let [i,cut] of cuts.entries()){
+  console.log("For of Loop", cut);
+}
