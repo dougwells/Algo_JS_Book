@@ -27,5 +27,23 @@ console.log(".map -> Plus 1", mapExArr, "origin", stack);
 //.for of loop.  New in ES6
 let cuts = ["steak", "chop", "roast"]
 for (let [i,cut] of cuts.entries()){
-  console.log("For of Loop", cut);
+  console.log(`For of Loop. ${cut} is index ${i}`);
 }
+
+//retrieving key value pairs from arrays
+//if no key given, it will simply be position index of array item
+let numbers = [1,2,3,4,5];
+
+  //entries method
+    let numEntries = numbers.entries()
+    console.log(numEntries.next().value);
+
+  //keys method
+    let numKeys = numbers.keys()
+    console.log(numKeys);
+    console.log(numKeys.next());
+
+  //values method
+    let numValues = numbers.values()
+    console.log(numValues.next());
+    console.log(numValues.next().value);
