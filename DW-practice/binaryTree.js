@@ -34,7 +34,9 @@ function BinarySearchTree() {
                 insertNode(node.right, newNode);
             }
         }
+        // console.log("left:", node.left.key, "key:", node.key, "right:", node.right.key)
     };
+
 
     this.inOrderTraverse = function(callback){
         inOrderTraverseNode(root, callback);
@@ -48,4 +50,46 @@ function BinarySearchTree() {
         }
     };
 
+    this.preOrderTraverse = function(callback){
+        preOrderTraverseNode(root, callback);
+    };
+
+    var preOrderTraverseNode = function (node, callback) {
+        if (node !== null) {
+            callback(node.key);
+            preOrderTraverseNode(node.left, callback);
+            preOrderTraverseNode(node.right, callback);
+        }
+    };
+
+    this.postOrderTraverse = function(callback){
+        postOrderTraverseNode(root, callback);
+    };
+
+    var postOrderTraverseNode = function (node, callback) {
+        if (node !== null) {
+            postOrderTraverseNode(node.left, callback);
+            postOrderTraverseNode(node.right, callback);
+            callback(node.key);
+        }
+    };
+
   }
+
+//test out the binary tree
+
+  //Vars needed to build & print tree
+  function printTree(a){console.log(a)}
+  var tree = new BinarySearchTree();
+  var treeArr = [11,7,15,5,9,13,20,3,6,8,10,12,14,18,25];
+
+  //create tree
+  treeArr.map(function(key){tree.insert(key);});
+
+  //print out tree
+  console.log("----- Pre Order Traverse -----")
+  tree.preOrderTraverse(printTree);
+  console.log('----- In Order Traverse -----')
+  tree.inOrderTraverse(printTree);
+  console.log('----- Post Order Traverse -----')
+  tree.postOrderTraverse(printTree);
