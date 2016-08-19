@@ -74,7 +74,21 @@ function BinarySearchTree() {
         }
     };
 
+    //find minimum
+    this.min = function(){
+      return minNode(root);
+    };
+
+    var minNode = function(node){
+      if(node.left === null){
+        return node.key
+      }
+      return minNode(node.left);
+      }
+
   }
+
+
 
 //test out the binary tree
 
@@ -86,10 +100,13 @@ function BinarySearchTree() {
   //create tree
   treeArr.map(function(key){tree.insert(key);});
 
-  //print out tree
-  console.log("----- Pre Order Traverse -----")
-  tree.preOrderTraverse(printTree);
-  console.log('----- In Order Traverse -----')
-  tree.inOrderTraverse(printTree);
-  console.log('----- Post Order Traverse -----')
-  tree.postOrderTraverse(printTree);
+  //find min node
+  console.log(tree.min());
+
+  // //print out tree
+  // console.log("----- Pre Order Traverse -----")
+  // tree.preOrderTraverse(printTree);
+  // console.log('----- In Order Traverse -----')
+  // tree.inOrderTraverse(printTree);
+  // console.log('----- Post Order Traverse -----')
+  // tree.postOrderTraverse(printTree);
