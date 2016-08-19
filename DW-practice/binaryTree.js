@@ -74,7 +74,7 @@ function BinarySearchTree() {
         }
     };
 
-    //find minimum
+    //find minima
     this.min = function(){
       return minNode(root);
     };
@@ -84,7 +84,19 @@ function BinarySearchTree() {
         return node.key
       }
       return minNode(node.left);
+    };
+
+    //find maxima
+    this.max = function(){
+      return maxNode(root);
+    };
+
+    var maxNode = function(node){
+      if(node.right === null){
+        return node.key
       }
+      return maxNode(node.right);
+    };
 
   }
 
@@ -100,8 +112,9 @@ function BinarySearchTree() {
   //create tree
   treeArr.map(function(key){tree.insert(key);});
 
-  //find min node
+  //find min & max nodes
   console.log(tree.min());
+  console.log(tree.max());
 
   // //print out tree
   // console.log("----- Pre Order Traverse -----")
