@@ -98,7 +98,27 @@ function BinarySearchTree() {
       return maxNode(node.right);
     };
 
+  //find node value
+  this.find = function(searchKey){
+    return findNode(searchKey, root)
   }
+
+  var findNode = function(searchKey, currNode){
+    if (searchKey === currNode.key){
+      return currNode;
+    }
+    if(searchKey<currNode.key){
+      return findNode(searchKey, currNode.left);
+    }
+    if(searchKey>currNode.key){
+      return findNode(searchKey, currNode.right);
+    }
+    else {
+      return null;
+    }
+  }
+
+}
 
 
 
