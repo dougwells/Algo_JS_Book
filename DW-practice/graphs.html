@@ -7,6 +7,9 @@
 <body>
 <script type="text/javascript" src="../chapter07/01-Dictionaries.js"></script>
 <!-- <script type="text/javascript" src="../chapter07/02-UsingDictionaries.js"></script> -->
+<script type="text/javascript" src="../chapter04/01-Queue.js"></script>
+
+
 <script>
 
 
@@ -24,6 +27,7 @@ var Graph = function(){
     adjList.get(w).push(v);
   }
 
+//Print out graph
   this.toString = function(){
     var s = '';
     for (var i=0; i<vertices.length; i++){
@@ -35,10 +39,40 @@ var Graph = function(){
       }
       s += '\n'; //{13}
     }
-
     return s;
-
     };
+
+//BFS - Breadth First Search
+  var initializeColor = function(){
+  var color = [];
+  for (var i=0; i<vertices.length; i++){
+    color[vertices[i]] = 'white';
+  }
+  return color;
+  };
+
+  this.bfs = function(v, callback){
+    var color = initializeColor();
+    queue = new Queue();
+    queue.enqueue(v);
+
+    while (!queue.isEmpty()){
+      var u = queue.dequeue();
+      neighbors = adjList.get(u);
+      color[u] = 'grey';
+      for (var i=0; i<neighbors.length; i++){
+        var w = neighbors[i];
+        if (color[w] === 'white'){
+          color[w] = 'grey';
+          queue.enqueue(w); //{13}
+        }
+      }
+      color[u] = 'black'; //{14}
+      if (callback) { //{15}
+        callback(u);
+      }
+    } // End internal while loop
+  }; // End this.bfs
 
 }  // End Graph
 
@@ -60,8 +94,14 @@ var Graph = function(){
     graph.addEdge('B', 'E');
     graph.addEdge('B', 'F');
     graph.addEdge('E', 'I');
-  //Print the graph  
+  //Print the graph
     console.log(graph.toString());
+
+// Test BFS
+  function printNode(value){
+    console.log('Visited vertex: ' + value);
+  }
+  graph.bfs(myVertices[0], printNode);
 
 </script>
 </body>
