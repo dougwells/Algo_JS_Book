@@ -44,11 +44,11 @@ var Graph = function(){
 
 //BFS - Breadth First Search
   var initializeColor = function(){
-  var color = [];
-  for (var i=0; i<vertices.length; i++){
-    color[vertices[i]] = 'white';
-  }
-  return color;
+    var color = [];
+    for (var i=0; i<vertices.length; i++){
+      color[vertices[i]] = 'white';
+    }
+    return color;
   };
 
   this.bfs = function(v, callback){
@@ -58,6 +58,7 @@ var Graph = function(){
 
     while (!queue.isEmpty()){
       var u = queue.dequeue();
+      console.log("exploring node", u)
       neighbors = adjList.get(u);
       color[u] = 'grey';
       for (var i=0; i<neighbors.length; i++){
@@ -67,6 +68,8 @@ var Graph = function(){
           queue.enqueue(w); //{13}
         }
       }
+      console.log("current queue")
+      queue.print()
       color[u] = 'black'; //{14}
       if (callback) { //{15}
         callback(u);
