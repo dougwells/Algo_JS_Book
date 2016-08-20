@@ -101,7 +101,7 @@ function BinarySearchTree() {
   //find node value
   this.find = function(searchKey){
     return findNode(searchKey, root)
-  }
+  };
 
   var findNode = function(searchKey, currNode){
     if (searchKey === currNode.key){
@@ -115,6 +115,32 @@ function BinarySearchTree() {
     }
     else {
       return null;
+    }
+  };
+
+  //find node value
+  this.remove = function(searchKey){
+    if (removeNode(searchKey, root)){
+      console.log("Node "+searchKey+" removed.")
+    }else{
+      console.log("Node "+searchKey+" not found.")
+    }
+  }
+
+  var removeNode = function(searchKey, currNode){
+    if(currNode === null){return false;}
+    if (searchKey === currNode.key){
+      // currNode = null
+      return true;
+    }
+    if(searchKey<currNode.key){
+      return removeNode(searchKey, currNode.left);
+    }
+    if(searchKey>currNode.key){
+      return removeNode(searchKey, currNode.right);
+    }
+    else {
+      return false;
     }
   }
 

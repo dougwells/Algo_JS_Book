@@ -57,3 +57,5 @@ function Dictionary(){
         return items;
     }
 }
+
+modules.export Dictionary;

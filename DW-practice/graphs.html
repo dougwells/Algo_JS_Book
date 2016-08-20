@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript" src="01-Dictionaries.js"></script>
+<script type="text/javascript" src="02-UsingDictionaries.js"></script>
+<script>
+var Dictionary = require(../chapter07/01-Dictionaries.js);
+
+
+var Graph = function(){
+  var vertices = [];
+  var adjList = new Dictionary();
+
+  this.addVertex = function(v){
+    vertices.push(v);
+    adjList.set(v,[]);
+  };
+}
+</script>
+</body>
+</html>
