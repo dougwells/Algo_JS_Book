@@ -8,6 +8,7 @@
 <script type="text/javascript" src="../chapter07/01-Dictionaries.js"></script>
 <!-- <script type="text/javascript" src="../chapter07/02-UsingDictionaries.js"></script> -->
 <script type="text/javascript" src="../chapter04/01-Queue.js"></script>
+<script type="text/javascript" src="../chapter03/01-Stack.js"></script>
 
 
 <script>
@@ -25,7 +26,16 @@ var Graph = function(){
   this.addEdge = function(v,w){
     adjList.get(v).push(w);
     adjList.get(w).push(v);
-  }
+  };
+
+  //initializeColor (which nodes have we visited?)
+    var initializeColor = function(){
+      var color = [];
+      for (var i=0; i<vertices.length; i++){
+        color[vertices[i]] = 'white';
+      }
+      return color;
+    };
 
 //Print out graph
   this.toString = function(){
@@ -42,19 +52,37 @@ var Graph = function(){
     return s;
     };
 
-//BFS - Breadth First Search
-  var initializeColor = function(){
-    var color = [];
-    for (var i=0; i<vertices.length; i++){
-      color[vertices[i]] = 'white';
-    }
-    return color;
-  };
 
+  //print out shortestPath from BFS
+  this.printShortestPath = function(fromVertex, shortestPathsFromGivenVertex, verticesArr){
+    for (var i=1; i<verticesArr.length; i++){
+      var toVertex = verticesArr[i],
+      path = new Stack();
+      for (
+        var v=toVertex;
+        v!== fromVertex;
+        v=shortestPathsFromGivenVertex.predecessors[v]
+      )
+      {
+        path.push(v);
+      }
+      path.push(fromVertex);
+      var s = path.pop();
+      while (!path.isEmpty()){
+        s += ' - ' + path.pop();
+      }
+      console.log(s);
+
+    }; // End outer for-loop
+  } //End this.printShortestPath function
+
+//bfs - Breadth First Search
   this.bfs = function(v, callback){
     var color = initializeColor();
     queue = new Queue();
     queue.enqueue(v);
+    console.log("Starting queue");
+    queue.print();
 
     while (!queue.isEmpty()){
       var u = queue.dequeue();
@@ -77,6 +105,42 @@ var Graph = function(){
     } // End internal while loop
   }; // End this.bfs
 
+// Enhanced BFS - used to determine shortest path
+this.BFS = function(v){
+
+    var color = initializeColor(),
+    queue = new Queue(),
+    d = {},
+    pred = {};
+    queue.enqueue(v);
+
+    for (var i=0; i<vertices.length; i++){
+        d[vertices[i]] = 0;
+        pred[vertices[i]] = null;
+    }
+
+    while (!queue.isEmpty()){
+        var u = queue.dequeue(),
+            neighbors = adjList.get(u);
+        color[u] = 'grey';
+        for (i=0; i<neighbors.length; i++){
+            var w = neighbors[i];
+            if (color[w] === 'white'){
+                color[w] = 'grey';
+                d[w] = d[u] + 1;
+                pred[w] = u;
+                queue.enqueue(w);
+            }
+        }
+        color[u] = 'black';
+    }
+
+    return {
+        distances: d,
+        predecessors: pred
+    };
+};
+
 }  // End Graph
 
 //Test Graph Code
@@ -97,14 +161,29 @@ var Graph = function(){
     graph.addEdge('B', 'E');
     graph.addEdge('B', 'F');
     graph.addEdge('E', 'I');
-  //Print the graph
+  // Print the graph
+    console.log("---- Current Graph ----")
     console.log(graph.toString());
 
-// Test BFS
-  function printNode(value){
-    console.log('Visited vertex: ' + value);
-  }
-  graph.bfs(myVertices[0], printNode);
+// // Test bfs
+//   function printNode(value){
+//     console.log('Visited vertex: ' + value);
+//   }
+//   graph.bfs(myVertices[0], printNode);
+
+//Test BFS (ehanced/shortest distance)
+
+  //shortest paths from A
+    var shortestPathA = graph.BFS(myVertices[0]);
+    console.log("---- Shortest Paths from", myVertices[0], "----");
+    graph.printShortestPath(myVertices[0], shortestPathA, myVertices);
+
+  //shortest paths from B
+  var shortestPathB = graph.BFS(myVertices[1]);
+  console.log("---- Shortest Paths from", myVertices[1], "----");
+  graph.printShortestPath(myVertices[1], shortestPathB, myVertices);
+
+
 
 </script>
 </body>
