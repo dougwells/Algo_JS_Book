@@ -147,7 +147,7 @@ this.dfs = function(callback){
 
   var color = initializeColor();
 
-  // To start at sink vertice of Graph (assumes at index 0)
+  // To start at sink vertice of Graph
     // var sinkIndex = 8;
     // dfsVisit(vertices[sinkIndex], color, callback);
 
@@ -155,7 +155,7 @@ this.dfs = function(callback){
   // dfsVisit(vertices[0], color, callback);
 
 
-//For-Loop --> serves as double-check (all-vertices eval)
+//For-Loop --> serves as double-check (starts at root (index 0))
   for (var i=0; i<vertices.length; i++){
       if (color[vertices[i]] === 'white'){
           dfsVisit(vertices[i], color, callback);
@@ -220,7 +220,7 @@ var DFSVisit = function(u, color, d, f, p){
     color[u] = 'grey';
     d[u] = ++time;
     var neighbors = adjList.get(u);
-    console.log('discovered ', u, " Discovered Time", d[u], "Neighbors", neighbors);
+    console.log('Discovered ', u, " Discovered Time", d[u], "Neighbors", neighbors);
 
     for (var i=0; i<neighbors.length; i++){
         var w = neighbors[i];
@@ -283,6 +283,28 @@ var DFSVisit = function(u, color, d, f, p){
   //depth first search
   console.log("---- Depth First Search ----");
   graph.DFS();
+
+  // Create Directed Acyclic Graph & explore it with DFS (pg 213)
+  var dag = new Graph()
+  dagVertices = ['A','B','C','D','E','F'];
+  for (var i=0; i<dagVertices.length; i++){
+    dag.addVertex(dagVertices[i]);
+  }
+  dag.addEdge('A', 'C');
+  dag.addEdge('A', 'D');
+  dag.addEdge('B', 'D');
+  dag.addEdge('B', 'E');
+  dag.addEdge('C', 'F');
+  dag.addEdge('F', 'E');
+
+  // Print the DAG graph
+    console.log("---- DAG Graph ----")
+    console.log(dag.toString());
+
+  console.log("---- Topological Search ----")
+  var result = dag.DFS();
+  console.dir(result.finished);
+
 
 </script>
 </body>
