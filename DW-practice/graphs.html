@@ -147,6 +147,15 @@ this.dfs = function(callback){
 
   var color = initializeColor();
 
+  // To start at sink vertice of Graph (assumes at index 0)
+    // var sinkIndex = 8;
+    // dfsVisit(vertices[sinkIndex], color, callback);
+
+// To start at root of Graph (assumes at index 0)
+  // dfsVisit(vertices[0], color, callback);
+
+
+//For-Loop --> serves as double-check (all-vertices eval)
   for (var i=0; i<vertices.length; i++){
       if (color[vertices[i]] === 'white'){
           dfsVisit(vertices[i], color, callback);
@@ -172,7 +181,58 @@ var dfsVisit = function(u, color, callback){
   }
   color[u] = 'black';
   console.log('explored ' + u);
+}; //ends dfsVisit
+// dfs complete
+
+// Improved DFS.  Tracks Discovered & Explored "time" or order
+// Outputs "Discovered Time / Fully Explored"
+
+var time = 0;
+this.DFS = function(){
+
+    var color = initializeColor(),
+        d = {},
+        f = {},
+        p = {};
+    time = 0;
+
+    for (var i=0; i<vertices.length; i++){
+        f[vertices[i]] = 0;
+        d[vertices[i]] = 0;
+        p[vertices[i]] = null;
+    }
+
+    for (i=0; i<vertices.length; i++){
+        if (color[vertices[i]] === 'white'){
+            DFSVisit(vertices[i], color, d, f, p);
+        }
+    }
+
+    return {
+        discovery: d,
+        finished: f,
+        predecessors: p
+    };
 };
+
+var DFSVisit = function(u, color, d, f, p){
+
+    color[u] = 'grey';
+    d[u] = ++time;
+    var neighbors = adjList.get(u);
+    console.log('discovered ', u, " Discovered Time", d[u], "Neighbors", neighbors);
+
+    for (var i=0; i<neighbors.length; i++){
+        var w = neighbors[i];
+        if (color[w] === 'white'){
+            p[w] = u;
+            DFSVisit(w,color, d, f, p);
+        }
+    }
+    color[u] = 'black';
+    f[u] = ++time;
+    console.log('explored ', u, "Disc Time", d[u], "Fully Exp Time", f[u], "Neighbors", neighbors, "Pred", p[u]);
+};  //End DFS - improved dfs
 
 }  // End Graph
 
@@ -219,6 +279,10 @@ var dfsVisit = function(u, color, callback){
   //depth first search
   console.log("---- depth first search ----");
   graph.dfs();
+
+  //depth first search
+  console.log("---- Depth First Search ----");
+  graph.DFS();
 
 </script>
 </body>
