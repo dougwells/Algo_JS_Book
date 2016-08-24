@@ -7,6 +7,13 @@ var INF = Number.MAX_SAFE_INTEGER;
 
 this.dijkstra = function(src){
 
+//Consider using heap strutcture instead of arrays
+var Heap = require('../../data-structures/heap.js').Heap;
+var current;
+var visited;
+var distance;
+var unvisited;
+
     var dist = [],
         visited = [],
         length = this.graph.length;
