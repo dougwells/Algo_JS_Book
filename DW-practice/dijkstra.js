@@ -1,3 +1,11 @@
+var simpleGraph = [
+[0, 2, 4, 0, 0, 0],   // node A
+[0, 0, 2, 4, 2, 0],   // node B
+[0, 0, 0, 0, 3, 0],   // node C
+[0, 0, 0, 0, 0, 2],   // node D
+[0, 0, 0, 3, 0, 2],   // node E
+[0, 0, 0, 0, 0, 0]];  // node F
+
 function ShortestPath(graph) {
 
 this.graph = graph;
@@ -6,13 +14,6 @@ var INF = Number.MAX_SAFE_INTEGER;
 
 
 this.dijkstra = function(src){
-
-//Consider using heap strutcture instead of arrays
-var Heap = require('../../data-structures/heap.js').Heap;
-var current;
-var visited;
-var distance;
-var unvisited;
 
     var dist = [],
         visited = [],
@@ -57,3 +58,6 @@ var minDistance = function(dist, visited){
   };
 
 }
+
+var testDijkstra = new ShortestPath(simpleGraph);
+console.dir(testDijkstra.dijkstra(0));
