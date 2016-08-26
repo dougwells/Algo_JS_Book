@@ -60,4 +60,10 @@ var minDistance = function(dist, visited){
 }
 
 var testDijkstra = new ShortestPath(simpleGraph);
-console.dir(testDijkstra.dijkstra(0));
+
+//Shortest paths from vertex/node ...
+  //Note, if no min distance, array value = inf ~= 9007199254740991
+console.log("Shortest paths from A",testDijkstra.dijkstra(0));
+console.log("Shortest paths from B", testDijkstra.dijkstra(1));
+console.log("Shortest paths from C", testDijkstra.dijkstra(2));
+console.log("Shortest paths from F", testDijkstra.dijkstra(6));
