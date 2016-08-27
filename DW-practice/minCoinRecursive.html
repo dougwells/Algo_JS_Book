@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+      <meta charset="UTF-8">
+      <title></title>
+  </head>
+  <body>
+  <script>
+  "use strict";
+
+
+    function minChange (amount, coinArr = [1,5,10,25]){
+      var answerArr = [];
+      var i = coinArr.length-1
+
+      function internal (amt = amount){
+        // base case
+        if(amt <= 0){return answerArr;}
+
+        if((amt-coinArr[i]) >= 0){
+          answerArr.push(coinArr[i])
+          amt = amt - coinArr[i]
+        }else{
+          i--;
+          // console.log("i", i)
+        }
+        return internal(amt)
+      };
+
+    return internal;
+  }
+
+  var makeChange = minChange(36, [1,5,10,25])
+
+    console.log(makeChange());
+  </script>
+  </body>
+  </html>
